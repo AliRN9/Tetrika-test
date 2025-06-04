@@ -8,13 +8,13 @@
 #Linux
 python3 -m venv myenv
 source myenv/bin/activate
-pip install requirements.txt
+pip install -r requirements.txt
 pytest tests
 
 #Windows
 python -m venv myenv
 myenv\Scripts\activate
-pip install requirements.txt
+pip install -r requirements.txt
 pytest tests 
 ```
 

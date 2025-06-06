@@ -1,6 +1,7 @@
 import asyncio
 import csv
 import logging
+import time
 from collections import Counter
 from dataclasses import dataclass, field
 from typing import Optional
@@ -38,7 +39,7 @@ class WikipediaAnimalParser:
             logger.error(f"Ошибка при запросе {url}: {e}")
             return None
 
-    async def parse_page(self, html: str) -> Optional[str]:
+    def parse_page(self, html: str) -> Optional[str]:
         """Считаем количество название животных на каждой странцие"""
         soup = BeautifulSoup(html, "html.parser")
 
@@ -81,7 +82,7 @@ class WikipediaAnimalParser:
             html = await self.get_html(url)
             if not html:
                 break
-            url = await self.parse_page(html)
+            url = self.parse_page(html)
         await self.save_to_csv()
 
 
@@ -93,4 +94,6 @@ if __name__ == "__main__":
             await parser.run()
 
 
+    start = time.time()
     asyncio.run(runner())
+    print(f"{time.time() - start=}")

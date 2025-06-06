@@ -24,7 +24,7 @@ async def test_parse_page_counts_letters_and_save_to_csv_success(async_client_mo
 
     parser = WikipediaAnimalParser(async_client_mock)
 
-    next_url = await parser.parse_page(sample_html)
+    next_url = parser.parse_page(sample_html)
 
     assert parser.counter["А"] == 1
     assert parser.counter["Б"] == 1
@@ -50,7 +50,7 @@ async def test_parse_page_terminates__success(async_client_mock: httpx.AsyncClie
     <a href="/wiki/Категория:Животные_по_алфавиту/Б">Следующая страница</a>
     """
     parser = WikipediaAnimalParser(async_client_mock)
-    next_url = await parser.parse_page(sample_html)
+    next_url = parser.parse_page(sample_html)
     assert next_url is None
 
     # print(f"{parser.counter=}")
@@ -72,7 +72,7 @@ async def test_get_html__wrong(async_client_mock: httpx.AsyncClient):
     <a href="/wiki/Категория:Животные_по_алфавиту/Б">Следующая страница</a>
     """
     parser = WikipediaAnimalParser(async_client_mock)
-    next_url = await parser.parse_page(sample_html)
+    next_url =  parser.parse_page(sample_html)
     assert next_url is None
 
     # print(f"{parser.counter=}")
